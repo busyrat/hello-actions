@@ -11,14 +11,13 @@ action "Deploy to GitHub Pages" {
     BUILD_DIR = "public/"
   }
   secrets = [
-    "GITHUB_TOKEN",
     "GH_PAT",
   ]
 }
 
 action "Hello World" {
   uses = "./custom-action"
-  needs = ["Deploy to GitHub Pages"],
+  needs = ["Deploy to GitHub Pages"]
   env = {
     NAME = "busyrat"
   }
