@@ -8,7 +8,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [8.x, 10.x, 12.x]
+        node-version: [12.x]
 
     steps:
       - uses: actions/checkout@v1
@@ -16,7 +16,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: npm install, build, and test
+      - name: npm build
         run: |
           ls -1 | grep -v ^node_modules | grep -v ^README | awk -F '.md' '{print "[" $1 "](./" $1 ")\n" }' >> README.md
           mkdir -p ./.vuepress && echo "module.exports={base:'/hello-actions/'}"  > ./.vuepress/config.js
