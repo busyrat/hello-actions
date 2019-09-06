@@ -1,12 +1,13 @@
 workflow "Hello world workflow" {
   resolves = [
-    "Hello World",
+    "Build",
   ]
   on = "push"
 }
 
 action "Deploy to GitHub Pages" {
   uses = "maxheld83/ghpages@v0.2.1"
+  needs = ["Build"]
   env = {
     BUILD_DIR = "public/"
   }
@@ -15,9 +16,8 @@ action "Deploy to GitHub Pages" {
   ]
 }
 
-action "Hello World" {
+action "Build" {
   uses = "./custom-action"
-  needs = ["Deploy to GitHub Pages"]
   env = {
     NAME = "busyrat"
   }
