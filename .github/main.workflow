@@ -1,14 +1,14 @@
 workflow "Hello world workflow" {
-    on = "push"
-    resolves = ["Echo", "Deploy to GitHub Pages"]
+  on = "push"
+  resolves = ["Echo", "Deploy to GitHub Pages"]
 }
 
 action "Echo" {
-    uses = "./custom-action"
-    env = {
-        NAME = "busyrat"
-    }
-    args = "\"Hello world, I'm $NAME!\""
+  uses = "./custom-action"
+  env = {
+    NAME = "busyrat"
+  }
+  args = "\"Hello world, I'm $NAME!\""
 }
 
 action "Deploy to GitHub Pages" {
@@ -16,5 +16,8 @@ action "Deploy to GitHub Pages" {
   env = {
     BUILD_DIR = "public/"
   }
-  secrets = ["GH_PAT"]
+  secrets = [
+    "GITHUB_TOKEN",
+    "GH_PAT",
+  ]
 }
