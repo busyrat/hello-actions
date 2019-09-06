@@ -18,8 +18,10 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: npm install, build, and test
         run: |
-          npm install
-          npm run build --if-present
-          npm test
+          ls -1 | grep -v ^node_modules | grep -v ^README | awk -F '.md' '{print "[" $1 "](./" $1 ")\n" }' >> README.md
+          mkdir -p ./.vuepress && echo "module.exports={base:'/doc/'}"  > ./.vuepress/config.js
+          yarn add vuepress
+          npx vuepress build .
+          mv .vuepress/dist public
         env:
           CI: true
