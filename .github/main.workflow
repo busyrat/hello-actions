@@ -17,7 +17,7 @@ action "Deploy to GitHub Pages" {
     BUILD_DIR = "public/"
   }
   secrets = [
-    "GH_PAT",
     "GITHUB_TOKEN",
+    "GH_PAT",
   ]
 }
